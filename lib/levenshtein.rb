@@ -4,10 +4,7 @@ module Levenshtein
   class << self
     extend FFI::Library
 
-    # Try loading in order.
-    library = File.dirname(__FILE__) + "/../ext/levenshtein/levenshtein"
-    candidates = ['.bundle', '.so', '.dylib', ''].map { |ext| library + ext }
-    ffi_lib(candidates)
+    ffi_lib File.join(File.dirname(__FILE__), "levenshtein.bundle")
 
     # Safe version of distance, checks that arguments are really strings.
     def distance(str1, str2)
